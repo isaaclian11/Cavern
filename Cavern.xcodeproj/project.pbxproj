@@ -8,10 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		1600D3AE386B8637BB55C1D2 /* Pods_Cavern.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7C8D8BFBAD8C2F727185D29 /* Pods_Cavern.framework */; };
+		E209A37527B0C89E00C82B9B /* CityModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E209A37427B0C89E00C82B9B /* CityModal.swift */; };
 		E21DCBFB27AB995000CE87A1 /* ShortHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21DCBFA27AB995000CE87A1 /* ShortHolder.swift */; };
 		E234F16B27A887F200EA382D /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = E234F16A27A887F200EA382D /* Home.swift */; };
-		E27BEDDC27ACE44C0002103A /* elephant2.gif in Resources */ = {isa = PBXBuildFile; fileRef = E27BEDDB27ACE44C0002103A /* elephant2.gif */; };
 		E27BEDDE27ADF0FA0002103A /* Geography.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27BEDDD27ADF0FA0002103A /* Geography.swift */; };
+		E27BEDE427AE00DF0002103A /* elephant.gif in Resources */ = {isa = PBXBuildFile; fileRef = E27BEDE327AE00DF0002103A /* elephant.gif */; };
 		E280C48127A9985100E71CB7 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280C48027A9985100E71CB7 /* Article.swift */; };
 		E293CE5227A5A5E700CC671F /* CavernApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E293CE5127A5A5E700CC671F /* CavernApp.swift */; };
 		E293CE5627A5A5E800CC671F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E293CE5527A5A5E800CC671F /* Assets.xcassets */; };
@@ -21,11 +22,12 @@
 /* Begin PBXFileReference section */
 		8301E94EDD33834DE903E3BF /* Pods-Cavern.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cavern.release.xcconfig"; path = "Target Support Files/Pods-Cavern/Pods-Cavern.release.xcconfig"; sourceTree = "<group>"; };
 		CE1718B8252AC6FDAD1A2D18 /* Pods-Cavern.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cavern.debug.xcconfig"; path = "Target Support Files/Pods-Cavern/Pods-Cavern.debug.xcconfig"; sourceTree = "<group>"; };
+		E209A37427B0C89E00C82B9B /* CityModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityModal.swift; sourceTree = "<group>"; };
 		E21DCBF227AB949D00CE87A1 /* elephant.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = elephant.gif; path = ../../../../Downloads/elephant.gif; sourceTree = "<group>"; };
 		E21DCBFA27AB995000CE87A1 /* ShortHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortHolder.swift; sourceTree = "<group>"; };
 		E234F16A27A887F200EA382D /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
-		E27BEDDB27ACE44C0002103A /* elephant2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = elephant2.gif; path = ../../../Downloads/elephant2.gif; sourceTree = "<group>"; };
 		E27BEDDD27ADF0FA0002103A /* Geography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geography.swift; sourceTree = "<group>"; };
+		E27BEDE327AE00DF0002103A /* elephant.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = elephant.gif; sourceTree = "<group>"; };
 		E280C48027A9985100E71CB7 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		E293CE4E27A5A5E700CC671F /* Cavern.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cavern.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E293CE5127A5A5E700CC671F /* CavernApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CavernApp.swift; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 		E21DCBFE27ACD65100CE87A1 /* gifs */ = {
 			isa = PBXGroup;
 			children = (
+				E27BEDE327AE00DF0002103A /* elephant.gif */,
 			);
 			path = gifs;
 			sourceTree = "<group>";
@@ -88,7 +91,6 @@
 				E293CE5127A5A5E700CC671F /* CavernApp.swift */,
 				E234F16A27A887F200EA382D /* Home.swift */,
 				E293CE5527A5A5E800CC671F /* Assets.xcassets */,
-				E27BEDDB27ACE44C0002103A /* elephant2.gif */,
 				E293CE5727A5A5E800CC671F /* Preview Content */,
 			);
 			path = Cavern;
@@ -109,6 +111,7 @@
 				E280C48027A9985100E71CB7 /* Article.swift */,
 				E21DCBFA27AB995000CE87A1 /* ShortHolder.swift */,
 				E27BEDDD27ADF0FA0002103A /* Geography.swift */,
+				E209A37427B0C89E00C82B9B /* CityModal.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -187,7 +190,7 @@
 			files = (
 				E293CE5927A5A5E800CC671F /* Preview Assets.xcassets in Resources */,
 				E293CE5627A5A5E800CC671F /* Assets.xcassets in Resources */,
-				E27BEDDC27ACE44C0002103A /* elephant2.gif in Resources */,
+				E27BEDE427AE00DF0002103A /* elephant.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,6 +247,7 @@
 				E234F16B27A887F200EA382D /* Home.swift in Sources */,
 				E293CE5227A5A5E700CC671F /* CavernApp.swift in Sources */,
 				E280C48127A9985100E71CB7 /* Article.swift in Sources */,
+				E209A37527B0C89E00C82B9B /* CityModal.swift in Sources */,
 				E21DCBFB27AB995000CE87A1 /* ShortHolder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

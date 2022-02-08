@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "FLAnimatedImage",
+        "repositoryURL": "https://github.com/Flipboard/FLAnimatedImage.git",
+        "state": {
+          "branch": null,
+          "revision": "e7f9fd4681ae41bf6f3056db08af4f401d61da52",
+          "version": "1.0.16"
+        }
+      },
+      {
+        "package": "SwiftyGif",
+        "repositoryURL": "https://github.com/kirualex/SwiftyGif.git",
+        "state": {
+          "branch": null,
+          "revision": "db0c122b671bc9760385e0355be00eede3b7bb44",
+          "version": "5.4.3"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

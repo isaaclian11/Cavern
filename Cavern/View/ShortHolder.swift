@@ -12,7 +12,7 @@ struct Short: View {
     var body: some View {
         
         ZStack {
-            SwiftUIGIFPlayerView(gifName: "elephant2")
+            SwiftUIGIFPlayerView(gifName: "elephant")
         }
         .ignoresSafeArea()
     }

@@ -10,7 +10,7 @@ import SwiftUI
 struct Home: View {
     var body: some View {
         
-       Learn()
+        Learn()
         
     }
 }
@@ -36,11 +36,11 @@ struct Learn: View {
     var body: some View {
         
         VStack {
+            
+            Header()
+
                         
             ScrollView(.vertical, showsIndicators: false) {
-                
-                Header()
-
                     
                 ArticlesView()
                 
@@ -291,7 +291,13 @@ struct ArticlesView: View {
                 }
                 
             }
-            .fullScreenCover(isPresented: $isSelected, content: Article.init)
+            .fullScreenCover(isPresented: $isSelected, content: {
+                if selectedArticle?.id == 2 {
+                    Geography()
+                } else {
+                    Article()
+                }
+            })
             
         }
     }

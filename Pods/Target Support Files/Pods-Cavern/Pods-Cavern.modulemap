@@ -1,0 +1,6 @@
+framework module Pods_Cavern {
+  umbrella header "Pods-Cavern-umbrella.h"
+
+  export *
+  module * { export * }
+}
