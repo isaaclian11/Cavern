@@ -32,18 +32,15 @@ struct Card : Identifiable {
 
 struct Learn: View {
     
-    
     var body: some View {
         
         VStack {
             
             Header()
-
-                        
+                    
             ScrollView(.vertical, showsIndicators: false) {
                     
                 ArticlesView()
-                
                 
                 ShortsView()
                     .padding(.top, 30)
@@ -51,10 +48,7 @@ struct Learn: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background((
-            LinearGradient(gradient: .init(colors: [Color("primary"), Color("secondary")]), startPoint: .top, endPoint: .bottom)
-                .edgesIgnoringSafeArea(.all)
-        ))
+        .background(Color("primary"))
     }
 }
 
@@ -88,6 +82,7 @@ struct ShortsView: View {
             .padding(.horizontal)
             
             ZStack {
+                
                 ForEach(stories.reversed()){story in
                     
                     HStack {
@@ -101,12 +96,12 @@ struct ShortsView: View {
                                 .frame(width: calculateWidth(), height: (UIScreen.main.bounds.height / 1.8) - CGFloat(story.id - scrolled) * 50)
                                 .cornerRadius(15)
                             // changing size based on scrolled
-                            
                                 .offset(x: story.id - scrolled <= 2 ? CGFloat(story.id - scrolled) * 30 : 60)
                             
                             VStack(alignment: .leading, spacing: 18) {
                                 
                                 HStack {
+                                    
                                     Text(story.title)
                                         .font(.title)
                                         .fontWeight(.bold)
@@ -142,14 +137,11 @@ struct ShortsView: View {
                         withAnimation{
                             
                             // disable gesture for final card
-                            
                             if value.translation.width < 0 && story.id != stories.last!.id {
                                 stories[story.id].offset = value.translation.width
                             }
                             else {
-                                
                                 // restore all cards
-                                
                                 if story.id > 0 {
                                     stories[story.id - 1].offset = -(calculateWidth() + 60) + value.translation.width
                                 }
@@ -217,10 +209,10 @@ struct ArticlesView: View {
     
     @State var articles = [
         //<ahref="https://www.vecteezy.com/free-vector/cave">Cave Vectors by Vecteezy</a>
-        Card(id: 0, image: "cross", offset: 0, title: "The Chin Origin"),
+        Card(id: 0, image: "cavern", offset: 0, title: "The Chin Origin"),
         
         // <a href="https://www.vecteezy.com/free-vector/cross">Cross Vectors by Vecteezy</a>
-        Card(id: 1, image: "cavern", offset: 0, title: "Culture"),
+        Card(id: 1, image: "cross", offset: 0, title: "Culture"),
         
         //<a href="https://www.vecteezy.com/free-vector/map">Map Vectors by Vecteezy</a>
         Card(id: 2, image: "migration", offset: 0, title: "Geography")
@@ -232,6 +224,7 @@ struct ArticlesView: View {
     var body: some View {
                 
         VStack {
+            
             HStack {
                 
                 Text("Read")
@@ -291,15 +284,14 @@ struct ArticlesView: View {
                 }
                 
             }
-            .fullScreenCover(isPresented: $isSelected, content: {
-                if selectedArticle?.id == 2 {
-                    Geography()
-                } else {
-                    Article()
-                }
-            })
-            
         }
+        .fullScreenCover(isPresented: $isSelected, content: {
+            if selectedArticle?.id == 2 {
+                Geography()
+            } else {
+                Article()
+            }
+        })
     }
 }
 

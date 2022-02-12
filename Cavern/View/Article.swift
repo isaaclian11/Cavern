@@ -13,10 +13,7 @@ struct Article: View {
     var body: some View {
         ZStack(alignment: .topTrailing) {
             
-            LinearGradient(gradient: Gradient(colors: [Color.black, Color.black.opacity(0.0)]), startPoint: .top, endPoint: .bottom)
-            
-            
-            LinearGradient(gradient: Gradient(colors: [Color("primary").opacity(0.4), Color("secondary")]), startPoint: .top, endPoint: .bottom)
+            Color("primary")
             
             ScrollView(.vertical) {
                 ZStack {

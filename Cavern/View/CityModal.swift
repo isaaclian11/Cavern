@@ -1,123 +1,105 @@
 //
-//  CityModal.swift
+//  FalamArticle.swift
 //  Cavern
 //
-//  Created by Isaac Zahau on 2/6/22.
+//  Created by Isaac Zahau on 2/11/22.
 //
 
 import SwiftUI
 
 struct CityModal: View {
     
-    @Binding var isShowing: Bool
-    @Binding var selectedCity: String
-    
-    @State var currentHeight: CGFloat = 240
-    @State private var isDragging = false
-    
-    let minHeight: CGFloat = 240
-    let maxHeight: CGFloat = UIScreen.main.bounds.height - 40
+    @Binding var selectedCity : Int
     
     var body: some View {
-        
-        ZStack(alignment: .bottom) {
+        ZStack(alignment: .top) {
             
-            if isShowing {
-                Color.black
-                    .opacity(0.3)
-                    .ignoresSafeArea()
-                    .onTapGesture {
-                        isShowing = false
-                        currentHeight = minHeight
-                    }
-                
-                mainView
-                    .transition(.move(edge: .bottom))
-            }
+            Color("primary")
             
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-        .ignoresSafeArea()
-        .animation(.easeInOut)
-        
-    }
-    
-    var mainView: some View {
-        VStack {
-            
-            ZStack {
-                Capsule()
-                    .frame(width: 40, height: 6)
-            }
-            .frame(height: 40)
-            .frame(maxWidth: .infinity)
-            .background(.white.opacity(0.00001)) // for dragging
-            .gesture(dragGesture)
-            
-            ZStack {
+            switch selectedCity {
+            case 0 :
                 VStack {
                     Text("Falam Township")
-                        .font(.system(size: 24, weight: .bold, design: .rounded))
+                        .font(.system(size: 16, weight: .bold))
                         .foregroundColor(.white)
+                        .padding(.top, 36)
                     
                     Text("Falam Township is located in the Chin State of Myanmar. It is located 5280 feet above sea level.")
                         .font(.system(size: 16, weight: .regular))
                         .foregroundColor(.white)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding(.horizontal)
-                        .padding(.top)
-                        
+                        .padding(.top, 12)
                 }
+            case 1 :
+                VStack {
+                    Text("Matupi Township")
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(.white)
+                        .padding(.top, 36)
+                    
+                    Text("Matupi Township is located in the Chin State of Myanmar. It is located 5280 feet above sea level.")
+                        .font(.system(size: 16, weight: .regular))
+                        .foregroundColor(.white)
+                        .padding(.top, 12)
+                }
+            case 2 :
+                VStack {
+                    Text("Hakha Township")
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(.white)
+                        .padding(.top, 36)
+                    
+                    Text("Hakha Township is located in the Chin State of Myanmar. It is located 5280 feet above sea level.")
+                        .font(.system(size: 16, weight: .regular))
+                        .foregroundColor(.white)
+                        .padding(.top, 12)
+                }
+            case 3 :
+                VStack {
+                    Text("Aizawl Township")
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(.white)
+                        .padding(.top, 36)
+                    
+                    Text("Aizawl Township is located in the Chin State of Myanmar. It is located 5280 feet above sea level.")
+                        .font(.system(size: 16, weight: .regular))
+                        .foregroundColor(.white)
+                        .padding(.top, 12)
+                }
+            case 4 :
+                VStack {
+                    Text("Tedim Township")
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(.white)
+                        .padding(.top, 36)
+                    
+                    Text("Tedim Township is located in the Chin State of Myanmar. It is located 5280 feet above sea level.")
+                        .font(.system(size: 16, weight: .regular))
+                        .foregroundColor(.white)
+                        .padding(.top, 12)
+                }
+            case 5 :
+                VStack {
+                    Text("Thantlang Township")
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(.white)
+                        .padding(.top, 36)
+                    
+                    Text("Thantlang Township is located in the Chin State of Myanmar. It is located 5280 feet above sea level.")
+                        .font(.system(size: 16, weight: .regular))
+                        .foregroundColor(.white)
+                        .padding(.top, 12)
             }
-            .frame(maxHeight: .infinity)
-            .padding(.bottom, 69)
-            
+            case _ :
+                VStack{
+                    
+                }
         }
-        .frame(height: currentHeight)
-        .frame(maxWidth: .infinity)
-        .background(
-            ZStack {
-                RoundedRectangle(cornerRadius: 30)
-                Rectangle()
-                    .frame(height: currentHeight / 2)
-            }
-            .foregroundColor(Color("primary"))
-        )
-        .animation(isDragging ? nil : .easeInOut(duration: 0.45))
-        
-    }
-    
-    @State private var prevDragTranslation = CGSize.zero
-    
-    var dragGesture: some Gesture {
-        DragGesture(minimumDistance: 0, coordinateSpace: .global)
-            .onChanged { val in
-                if !isDragging {
-                    isDragging = true
-                }
-                let dragAmount = val.translation.height - prevDragTranslation.height
-                if currentHeight > maxHeight || currentHeight < minHeight {
-                    currentHeight -= dragAmount / 6
-                } else {
-                    currentHeight -= dragAmount
-                }
-                prevDragTranslation = val.translation
-            }
-            .onEnded { val in
-                prevDragTranslation = .zero
-                isDragging = false
-                if currentHeight > maxHeight {
-                    currentHeight = maxHeight
-                } else if currentHeight < minHeight {
-                    currentHeight = minHeight
-                    isShowing = false
-                }
-            }
     }
 }
+}
 
-struct CityModal_Previews: PreviewProvider {
+struct FalamArticle_Previews: PreviewProvider {
     static var previews: some View {
-        CityModal(isShowing: .constant(true), selectedCity: .constant(""))
+        CityModal(selectedCity: .constant(1))
     }
 }
