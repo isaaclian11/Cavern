@@ -7,5 +7,6 @@ target 'Cavern' do
 
   # Pods for Cavern
   pod 'SSSwiftUIGIFView'
+  pod 'WaterfallGrid', '~> 1.0.0'
 
 end

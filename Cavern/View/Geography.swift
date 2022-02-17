@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Geography: View {
     
-    @State private var selectedCity = -1
+    @State private var selectedCity = 0
     @State private var isShowing = false
     
     private let FALAM = "Falam"
@@ -54,7 +54,7 @@ struct Geography: View {
                         .resizable()
                         .frame(width:20, height: 20)
                         .padding(.top, UIScreen.main.bounds.height * 0.15)
-                        .padding(.trailing, UIScreen.main.bounds.width * 0.2)
+                        .padding(.trailing, UIScreen.main.bounds.width * 0.13)
                         .foregroundColor(selectedCity == 1 && isShowing ? Color.white : Color.black)
                         .onTapGesture {
                             if offset >= 0 {
@@ -69,7 +69,7 @@ struct Geography: View {
                         .resizable()
                         .frame(width:20, height: 20)
                         .padding(.bottom, UIScreen.main.bounds.height * 0.2)
-                        .padding(.trailing, UIScreen.main.bounds.width * 0.1)
+                        .padding(.trailing, UIScreen.main.bounds.width * 0.0)
                         .foregroundColor(selectedCity == 2 && isShowing ? Color.white : Color.black)
                         .onTapGesture {
                             if offset >= 0 {
@@ -84,7 +84,7 @@ struct Geography: View {
                         .resizable()
                         .frame(width:20, height: 20)
                         .padding(.bottom, UIScreen.main.bounds.height * 0.24)
-                        .padding(.trailing, UIScreen.main.bounds.width * 0.24)
+                        .padding(.trailing, UIScreen.main.bounds.width * 0.15)
                         .foregroundColor(selectedCity == 5 && isShowing ? Color.white : Color.black)
                         .onTapGesture {
                             if offset >= 0  {
@@ -99,7 +99,7 @@ struct Geography: View {
                         .resizable()
                         .frame(width:20, height: 20)
                         .padding(.bottom, UIScreen.main.bounds.height * 0.32)
-                        .padding(.trailing, UIScreen.main.bounds.width * 0.01)
+                        .padding(.trailing, UIScreen.main.bounds.width * 0)
                         .foregroundColor(selectedCity == 0 && isShowing ? Color.white : Color.black)
                         .onTapGesture {
                             if offset >= 0  {
@@ -115,7 +115,7 @@ struct Geography: View {
                         .resizable()
                         .frame(width:20, height: 20)
                         .padding(.bottom, UIScreen.main.bounds.height * 0.5)
-                        .padding(.trailing, UIScreen.main.bounds.width * 0.1)
+                        .padding(.trailing, UIScreen.main.bounds.width * 0)
                         .foregroundColor(selectedCity == 4 && isShowing ? Color.white : Color.black)
                         .onTapGesture {
                             if offset >= 0  {
@@ -130,7 +130,7 @@ struct Geography: View {
                         .resizable()
                         .frame(width:20, height: 20)
                         .padding(.bottom, UIScreen.main.bounds.height * 0.6)
-                        .padding(.trailing, UIScreen.main.bounds.width * 0.66)
+                        .padding(.trailing, UIScreen.main.bounds.width * 0.55)
                         .foregroundColor(selectedCity == 3 && isShowing ? Color.white : Color.black)
                         .onTapGesture {
                             if offset >= 0  {
@@ -140,7 +140,6 @@ struct Geography: View {
                             }
                         }
                 }
-                .blur(radius: getBlurRadius())
                 
                 VStack {
                     ZStack {
@@ -181,10 +180,13 @@ struct Geography: View {
                                             if !isShowing {
                                                 updateSelectedCity(city: city.id)
                                             }
+                                            let impactMed = UIImpactFeedbackGenerator(style: .medium)
+                                            impactMed.impactOccurred()
                                         }
                                 }
                             }
                             .padding(.leading, 24)
+                            .padding(.bottom)
                         }
                         
                     }
@@ -200,6 +202,7 @@ struct Geography: View {
                     lastOffset = offset
                 }
             }
+            .blur(radius: getBlurRadius())
             
             
             ZStack {

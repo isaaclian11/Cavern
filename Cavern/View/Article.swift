@@ -56,26 +56,7 @@ struct Article: View {
                     }
                 }
             }
-            .padding(.top)
-            
-            Button(action: {
-                presentationMode.wrappedValue.dismiss()
-            }, label: {
-                    ZStack {
-                        Circle()
-                            .fill(Color("secondary"))
-                            .frame(width: 30, height: 30)
-                        
-                        Image(systemName: "xmark")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                    }
-                    .padding(.horizontal)
-                    .padding(.top, 40)
-                    .contentShape(Circle())
-                })
-                .buttonStyle(PlainButtonStyle())
-                .accessibilityLabel(Text("Close"))
+            .padding(.top, 40)
         }
         .edgesIgnoringSafeArea(.all)
     }

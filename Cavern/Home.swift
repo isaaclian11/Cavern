@@ -10,8 +10,35 @@ import SwiftUI
 struct Home: View {
     var body: some View {
         
-        Learn()
-        
+        NavigationView {
+            
+            ZStack {
+                
+                VStack {
+                    
+                            
+                    ScrollView(.vertical, showsIndicators: false) {
+                                                    
+                        ArticlesView()
+                            .padding(.top, 30)
+                        
+                        ShortsView()
+                            .padding(.top, 30)
+                        
+                        Gallery()
+                            .padding(.top, 30)
+                            .padding(.horizontal, 8)
+                        
+                    }
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color("primary"))
+                .preferredColorScheme(.dark)
+            }
+            .navigationTitle("")
+            .navigationBarHidden(true)
+        }
+        .accentColor(.white)
     }
 }
 
@@ -29,41 +56,18 @@ struct Card : Identifiable {
     var title : String
 }
 
-
-struct Learn: View {
-    
-    var body: some View {
-        
-        VStack {
-            
-            Header()
-                    
-            ScrollView(.vertical, showsIndicators: false) {
-                    
-                ArticlesView()
-                
-                ShortsView()
-                    .padding(.top, 30)
-                
-            }
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color("primary"))
-    }
-}
-
 struct ShortsView: View {
     
     @State var stories = [
         
         //<ahref="https://www.vecteezy.com/free-vector/cave">Cave Vectors by Vecteezy</a>
-        Card(id: 0, image: "cavern", offset: 0, title: "The Chin Origin"),
+        Card(id: 0, image: "bird", offset: 0, title: "The Chin Origin"),
         
         // <a href="https://www.vecteezy.com/free-vector/cross">Cross Vectors by Vecteezy</a>
-        Card(id: 1, image: "cross", offset: 0, title: "Culture"),
+        Card(id: 1, image: "traditional", offset: 0, title: "Culture"),
         
         //<a href="https://www.vecteezy.com/free-vector/map">Map Vectors by Vecteezy</a>
-        Card(id: 2, image: "migration", offset: 0, title: "Geography")
+        Card(id: 2, image: "story", offset: 0, title: "Geography")
     ]
     
     @State var scrolled = 0
@@ -73,7 +77,7 @@ struct ShortsView: View {
             HStack {
                 
                 Text("Shorts")
-                    .font(.system(size: 40, weight: .bold))
+                    .font(.system(size: 40, weight: .regular))
                     .foregroundColor(.white)
                 
                 Spacer(minLength: 0)
@@ -81,113 +85,24 @@ struct ShortsView: View {
             }
             .padding(.horizontal)
             
-            ZStack {
-                
-                ForEach(stories.reversed()){story in
-                    
-                    HStack {
-                        
-                        ZStack(alignment: Alignment(horizontal: .leading, vertical: .bottom)) {
-                            
-                            Image(story.image)
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                            // dynamic frame and height
-                                .frame(width: calculateWidth(), height: (UIScreen.main.bounds.height / 1.8) - CGFloat(story.id - scrolled) * 50)
-                                .cornerRadius(15)
-                            // changing size based on scrolled
-                                .offset(x: story.id - scrolled <= 2 ? CGFloat(story.id - scrolled) * 30 : 60)
-                            
-                            VStack(alignment: .leading, spacing: 18) {
-                                
-                                HStack {
-                                    
-                                    Text(story.title)
-                                        .font(.title)
-                                        .fontWeight(.bold)
-                                        .foregroundColor(.white)
-                                    
-                                    Spacer()
+            HStack {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 20) {
+                        ForEach(stories){story in
+                            NavigationLink(destination: Short(), label: {
+                                ZStack {
+                                    Image(story.image)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 300, height: 400)
+                                        .cornerRadius(15)
                                 }
-                                
-                                Button(action: {}) {
-                                    
-                                    Text("5 min read")
-                                        .font(.caption)
-                                        .fontWeight(.bold)
-                                        .foregroundColor(.white)
-                                        .padding(.vertical, 6)
-                                        .padding(.horizontal, 25)
-                                        .background(Color("capsule"))
-                                        .clipShape(Capsule())
-                                }
-                            }
-                            .frame(width: calculateWidth() - 40)
-                            .padding(.leading, 20)
-                            .padding(.bottom, 20)
+                            })
                         }
-                        
-                        Spacer(minLength: 0)
                     }
-                    .contentShape(Rectangle())
-                    // gesture
-                    .offset(x: story.offset)
-                    .gesture(DragGesture().onChanged({ (value) in
-                        
-                        withAnimation{
-                            
-                            // disable gesture for final card
-                            if value.translation.width < 0 && story.id != stories.last!.id {
-                                stories[story.id].offset = value.translation.width
-                            }
-                            else {
-                                // restore all cards
-                                if story.id > 0 {
-                                    stories[story.id - 1].offset = -(calculateWidth() + 60) + value.translation.width
-                                }
-                            }
-                        }
-                        
-                    }).onEnded({ (value) in
-                        
-                        withAnimation {
-                            
-                            if value.translation.width < 0 {
-                                
-                                if -value.translation.width > 100 && story.id != stories.last!.id {
-                                    
-                                    // move card away
-                                    stories[story.id].offset = -(calculateWidth() + 60)
-                                    scrolled += 1
-                                }
-                                else {
-                                    stories[story.id].offset = 0
-                                }
-                            }
-                            else {
-                                
-                                if story.id > 0 {
-                                    if value.translation.width > 100 {
-                                        stories[story.id - 1].offset = 0
-                                        scrolled -= 1
-                                    }
-                                    else {
-                                        
-                                        stories[story.id - 1].offset = -(calculateWidth() + 60)
-                                    }
-                                }
-                            }
-                            
-                        }
-                    }))
-                    
+                    .padding(.leading)
                 }
             }
-            // max height
-            .frame(height: UIScreen.main.bounds.height / 1.8)
-            .padding(.horizontal, 25)
-            
-            Spacer()
         }
     }
     
@@ -209,18 +124,15 @@ struct ArticlesView: View {
     
     @State var articles = [
         //<ahref="https://www.vecteezy.com/free-vector/cave">Cave Vectors by Vecteezy</a>
-        Card(id: 0, image: "cavern", offset: 0, title: "The Chin Origin"),
+        Card(id: 0, image: "mountain_1", offset: 0, title: "The Chin Origin"),
         
         // <a href="https://www.vecteezy.com/free-vector/cross">Cross Vectors by Vecteezy</a>
-        Card(id: 1, image: "cross", offset: 0, title: "Culture"),
+        Card(id: 1, image: "mountain_2", offset: 0, title: "Culture"),
         
         //<a href="https://www.vecteezy.com/free-vector/map">Map Vectors by Vecteezy</a>
-        Card(id: 2, image: "migration", offset: 0, title: "Geography")
+        Card(id: 2, image: "mountain_3", offset: 0, title: "Geography")
     ]
-    
-    @State var selectedArticle: Card?
-    @State var isSelected = false
-    
+        
     var body: some View {
                 
         VStack {
@@ -228,7 +140,7 @@ struct ArticlesView: View {
             HStack {
                 
                 Text("Read")
-                    .font(.system(size: 40, weight: .bold))
+                    .font(.system(size: 40, weight: .regular))
                     .foregroundColor(.white)
                 
                 Spacer(minLength: 0)
@@ -237,47 +149,42 @@ struct ArticlesView: View {
             .padding(.leading)
             
             HStack {
-                
-                ScrollView(.horizontal) {
-                    
+                ScrollView(.horizontal, showsIndicators: false) {
                     HStack (spacing: 20) {
-                        
                         ForEach(articles){article in
                             
-                            ZStack(alignment: .bottom) {
-                                Image(article.image)
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 200, height: 200)
-                                    .cornerRadius(15)
-                                
-                                VStack(alignment: .leading) {
+                            NavigationLink(destination: Article(), label: {
+                                ZStack(alignment: .bottom) {
+                                    Image(article.image)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 200, height: 200)
+                                        .cornerRadius(15)
                                     
-                                    HStack {
-                                        Text(article.title)
-                                            .font(.system(size: 16))
+                                    VStack(alignment: .leading) {
+                                        
+                                        HStack {
+                                            Text(article.title)
+                                                .font(.system(size: 16))
+                                                .fontWeight(.regular)
+                                                .foregroundColor(.white)
+                                            
+                                            Spacer()
+                                        }
+                                                                                
+                                        Text("5 min read")
+                                            .font(.caption)
                                             .fontWeight(.bold)
                                             .foregroundColor(.white)
-                                        
-                                        Spacer()
+                                            .padding(.vertical, 6)
+                                            .padding(.horizontal, 25)
+                                            .background(Color("capsule"))
+                                            .clipShape(Capsule())
                                     }
-                                                                            
-                                    Text("5 min read")
-                                        .font(.caption)
-                                        .fontWeight(.bold)
-                                        .foregroundColor(.white)
-                                        .padding(.vertical, 6)
-                                        .padding(.horizontal, 25)
-                                        .background(Color("capsule"))
-                                        .clipShape(Capsule())
+                                    .padding(.leading)
+                                    .padding(.bottom)
                                 }
-                                .padding(.leading)
-                                .padding(.bottom)
-                            }
-                            .onTapGesture {
-                                self.selectedArticle = article
-                                self.isSelected.toggle()
-                            }
+                            })
                         }
                     }
                     .padding(.leading)
@@ -285,13 +192,6 @@ struct ArticlesView: View {
                 
             }
         }
-        .fullScreenCover(isPresented: $isSelected, content: {
-            if selectedArticle?.id == 2 {
-                Geography()
-            } else {
-                Article()
-            }
-        })
     }
 }
 
