@@ -35,7 +35,7 @@ struct Geography: View {
     
     var body: some View {
         
-        let height = UIScreen.main.bounds.height
+        let height = UIScreen.main.bounds.height - 100
         let maxHeight = height - 200
 
         ZStack {
@@ -273,7 +273,7 @@ struct Geography: View {
 
 struct Geography_Previews: PreviewProvider {
     static var previews: some View {
-        Geography()
+        Home()
     }
 }
 

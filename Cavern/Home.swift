@@ -16,6 +16,10 @@ struct Home: View {
                 
                 VStack {
                     
+                    Header()
+                        .navigationBarHidden(true)
+                        .navigationBarTitle(Text("Home"))
+                    
                             
                     ScrollView(.vertical, showsIndicators: false) {
                                                     
@@ -64,10 +68,10 @@ struct ShortsView: View {
         Card(id: 0, image: "bird", offset: 0, title: "The Chin Origin"),
         
         // <a href="https://www.vecteezy.com/free-vector/cross">Cross Vectors by Vecteezy</a>
-        Card(id: 1, image: "traditional", offset: 0, title: "Culture"),
+        Card(id: 1, image: "bird", offset: 0, title: "Culture"),
         
         //<a href="https://www.vecteezy.com/free-vector/map">Map Vectors by Vecteezy</a>
-        Card(id: 2, image: "story", offset: 0, title: "Geography")
+        Card(id: 2, image: "bird", offset: 0, title: "Geography")
     ]
     
     @State var scrolled = 0
@@ -90,12 +94,23 @@ struct ShortsView: View {
                     HStack(spacing: 20) {
                         ForEach(stories){story in
                             NavigationLink(destination: Short(), label: {
-                                ZStack {
+                                ZStack (alignment: .topLeading) {
                                     Image(story.image)
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
                                         .frame(width: 300, height: 400)
                                         .cornerRadius(15)
+                                    
+                                    VStack (alignment: .leading, spacing: 2) {
+                                        Text("The Chin Origin")
+                                            .font(.system(size: 24, weight: .bold))
+                                            .padding(.top, 32)
+                                            .padding(.horizontal)
+                                        
+                                        Text("Learn the history of the Chin people")
+                                            .padding(.horizontal)
+
+                                    }
                                 }
                             })
                         }
@@ -130,7 +145,7 @@ struct ArticlesView: View {
         Card(id: 1, image: "mountain_2", offset: 0, title: "Culture"),
         
         //<a href="https://www.vecteezy.com/free-vector/map">Map Vectors by Vecteezy</a>
-        Card(id: 2, image: "mountain_3", offset: 0, title: "Geography")
+        Card(id: 2, image: "myanmar", offset: 0, title: "Geography")
     ]
         
     var body: some View {
@@ -153,7 +168,13 @@ struct ArticlesView: View {
                     HStack (spacing: 20) {
                         ForEach(articles){article in
                             
-                            NavigationLink(destination: Article(), label: {
+                            NavigationLink(destination: {
+                                if article.id == 2 {
+                                    Geography()
+                                } else {
+                                    Article()
+                                }
+                            }, label: {
                                 ZStack(alignment: .bottom) {
                                     Image(article.image)
                                         .resizable()

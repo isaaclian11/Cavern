@@ -12,6 +12,7 @@
 		E209A37927B750A100C82B9B /* RoundedCorners.swift in Sources */ = {isa = PBXBuildFile; fileRef = E209A37827B750A100C82B9B /* RoundedCorners.swift */; };
 		E209A37B27B9AB9D00C82B9B /* Gallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = E209A37A27B9AB9D00C82B9B /* Gallery.swift */; };
 		E21DCBFB27AB995000CE87A1 /* ShortHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21DCBFA27AB995000CE87A1 /* ShortHolder.swift */; };
+		E2208FBA27C9CF4A0099F68A /* PictureInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2208FB927C9CF4A0099F68A /* PictureInfo.swift */; };
 		E234F16B27A887F200EA382D /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = E234F16A27A887F200EA382D /* Home.swift */; };
 		E27BEDDE27ADF0FA0002103A /* Geography.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27BEDDD27ADF0FA0002103A /* Geography.swift */; };
 		E27BEDE427AE00DF0002103A /* elephant.gif in Resources */ = {isa = PBXBuildFile; fileRef = E27BEDE327AE00DF0002103A /* elephant.gif */; };
@@ -29,6 +30,7 @@
 		E209A37A27B9AB9D00C82B9B /* Gallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gallery.swift; sourceTree = "<group>"; };
 		E21DCBF227AB949D00CE87A1 /* elephant.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = elephant.gif; path = ../../../../Downloads/elephant.gif; sourceTree = "<group>"; };
 		E21DCBFA27AB995000CE87A1 /* ShortHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortHolder.swift; sourceTree = "<group>"; };
+		E2208FB927C9CF4A0099F68A /* PictureInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureInfo.swift; sourceTree = "<group>"; };
 		E234F16A27A887F200EA382D /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		E27BEDDD27ADF0FA0002103A /* Geography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geography.swift; sourceTree = "<group>"; };
 		E27BEDE327AE00DF0002103A /* elephant.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = elephant.gif; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				E209A37627B74BE400C82B9B /* CityModal.swift */,
 				E209A37827B750A100C82B9B /* RoundedCorners.swift */,
 				E209A37A27B9AB9D00C82B9B /* Gallery.swift */,
+				E2208FB927C9CF4A0099F68A /* PictureInfo.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 			files = (
 				E209A37B27B9AB9D00C82B9B /* Gallery.swift in Sources */,
 				E209A37727B74BE400C82B9B /* CityModal.swift in Sources */,
+				E2208FBA27C9CF4A0099F68A /* PictureInfo.swift in Sources */,
 				E27BEDDE27ADF0FA0002103A /* Geography.swift in Sources */,
 				E234F16B27A887F200EA382D /* Home.swift in Sources */,
 				E293CE5227A5A5E700CC671F /* CavernApp.swift in Sources */,
