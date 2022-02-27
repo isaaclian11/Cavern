@@ -8,31 +8,35 @@
 import SwiftUI
 
 struct Home: View {
+    
+    @ObservedObject private var articles = ArticleViewModel()
+        
     var body: some View {
         
         NavigationView {
             
             ZStack {
-                
+
                 VStack {
-                    
+
                     Header()
                         .navigationBarHidden(true)
                         .navigationBarTitle(Text("Home"))
-                    
-                            
+
+
                     ScrollView(.vertical, showsIndicators: false) {
-                                                    
+
                         ArticlesView()
                             .padding(.top, 30)
-                        
+
+
                         ShortsView()
                             .padding(.top, 30)
-                        
+
                         Gallery()
                             .padding(.top, 30)
                             .padding(.horizontal, 8)
-                        
+
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -41,7 +45,11 @@ struct Home: View {
             }
             .navigationTitle("")
             .navigationBarHidden(true)
+            
         }
+        .onAppear(perform: {
+            self.articles.getArticles()
+        })
         .accentColor(.white)
     }
 }
@@ -55,9 +63,9 @@ struct Home_Previews: PreviewProvider {
 struct Card : Identifiable {
     
     var id : Int
-    var image : String
-    var offset : CGFloat
+    var image_uri : String
     var title : String
+    var body : String
 }
 
 struct ShortsView: View {
@@ -65,13 +73,13 @@ struct ShortsView: View {
     @State var stories = [
         
         //<ahref="https://www.vecteezy.com/free-vector/cave">Cave Vectors by Vecteezy</a>
-        Card(id: 0, image: "bird", offset: 0, title: "The Chin Origin"),
+        Card(id: 0, image_uri: "bird", title: "The Chin Origin", body: ""),
         
         // <a href="https://www.vecteezy.com/free-vector/cross">Cross Vectors by Vecteezy</a>
-        Card(id: 1, image: "bird", offset: 0, title: "Culture"),
+        Card(id: 1, image_uri: "bird", title: "Culture", body: ""),
         
         //<a href="https://www.vecteezy.com/free-vector/map">Map Vectors by Vecteezy</a>
-        Card(id: 2, image: "bird", offset: 0, title: "Geography")
+        Card(id: 2, image_uri: "bird", title: "Geography", body: "")
     ]
     
     @State var scrolled = 0
@@ -95,7 +103,7 @@ struct ShortsView: View {
                         ForEach(stories){story in
                             NavigationLink(destination: Short(), label: {
                                 ZStack (alignment: .topLeading) {
-                                    Image(story.image)
+                                    Image(story.image_uri)
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
                                         .frame(width: 300, height: 400)
@@ -137,16 +145,7 @@ struct ShortsView: View {
 
 struct ArticlesView: View {
     
-    @State var articles = [
-        //<ahref="https://www.vecteezy.com/free-vector/cave">Cave Vectors by Vecteezy</a>
-        Card(id: 0, image: "mountain_1", offset: 0, title: "The Chin Origin"),
-        
-        // <a href="https://www.vecteezy.com/free-vector/cross">Cross Vectors by Vecteezy</a>
-        Card(id: 1, image: "mountain_2", offset: 0, title: "Culture"),
-        
-        //<a href="https://www.vecteezy.com/free-vector/map">Map Vectors by Vecteezy</a>
-        Card(id: 2, image: "myanmar", offset: 0, title: "Geography")
-    ]
+    @ObservedObject var articleViewModel = ArticleViewModel()
         
     var body: some View {
                 
@@ -166,33 +165,29 @@ struct ArticlesView: View {
             HStack {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack (spacing: 20) {
-                        ForEach(articles){article in
+                        ForEach($articleViewModel.list){ $article in
                             
                             NavigationLink(destination: {
-                                if article.id == 2 {
-                                    Geography()
-                                } else {
-                                    Article()
-                                }
+                                Article(article: $article)
                             }, label: {
                                 ZStack(alignment: .bottom) {
-                                    Image(article.image)
+                                    Image(article.image_uri)
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
                                         .frame(width: 200, height: 200)
                                         .cornerRadius(15)
-                                    
+
                                     VStack(alignment: .leading) {
-                                        
+
                                         HStack {
                                             Text(article.title)
                                                 .font(.system(size: 16))
                                                 .fontWeight(.regular)
                                                 .foregroundColor(.white)
-                                            
+
                                             Spacer()
                                         }
-                                                                                
+
                                         Text("5 min read")
                                             .font(.caption)
                                             .fontWeight(.bold)
@@ -213,6 +208,11 @@ struct ArticlesView: View {
                 
             }
         }
+    }
+    
+    init() {
+        articleViewModel.getArticles()
+        print(articleViewModel.list)
     }
 }
 
