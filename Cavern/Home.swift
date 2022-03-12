@@ -6,40 +6,40 @@
 //
 
 import SwiftUI
+import WaterfallGrid
 
 struct Home: View {
     
-    @ObservedObject private var articles = ArticleViewModel()
-        
+    @ObservedObject var galleryViewModel = GalleryViewModel()
+    
     var body: some View {
         
         NavigationView {
             
             ZStack {
-
+                
                 VStack {
-
+                    
                     Header()
                         .navigationBarHidden(true)
                         .navigationBarTitle(Text("Home"))
-
-
+                    
+                    
                     ScrollView(.vertical, showsIndicators: false) {
-
+                        
                         ArticlesView()
                             .padding(.top, 30)
-
-
+                        
+                        
                         ShortsView()
                             .padding(.top, 30)
-
+                        
                         Gallery()
                             .padding(.top, 30)
                             .padding(.horizontal, 8)
-
+                        
                     }
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color("primary"))
                 .preferredColorScheme(.dark)
             }
@@ -48,7 +48,7 @@ struct Home: View {
             
         }
         .onAppear(perform: {
-            self.articles.getArticles()
+            galleryViewModel.getGallery()
         })
         .accentColor(.white)
     }
@@ -57,6 +57,7 @@ struct Home: View {
 struct Home_Previews: PreviewProvider {
     static var previews: some View {
         Home()
+.previewInterfaceOrientation(.portraitUpsideDown)
     }
 }
 
@@ -73,7 +74,7 @@ struct ShortsView: View {
     @State var stories = [
         
         //<ahref="https://www.vecteezy.com/free-vector/cave">Cave Vectors by Vecteezy</a>
-        Card(id: 0, image_uri: "bird", title: "The Chin Origin", body: ""),
+        Card(id: 0, image_uri: "shorts_mountain", title: "The Chin Origin", body: ""),
         
         // <a href="https://www.vecteezy.com/free-vector/cross">Cross Vectors by Vecteezy</a>
         Card(id: 1, image_uri: "bird", title: "Culture", body: ""),
@@ -117,7 +118,7 @@ struct ShortsView: View {
                                         
                                         Text("Learn the history of the Chin people")
                                             .padding(.horizontal)
-
+                                        
                                     }
                                 }
                             })
@@ -129,26 +130,14 @@ struct ShortsView: View {
         }
     }
     
-    func calculateWidth() -> CGFloat {
-        
-        // Horizontal Padding of 30
-        let screen = UIScreen.main.bounds.width - 50
-        
-        // showing the first three cards and hiding the rest
-        
-        let width = screen - (2 * 30)
-        
-        return width
-    }
-    
 }
 
 struct ArticlesView: View {
     
     @ObservedObject var articleViewModel = ArticleViewModel()
-        
+    
     var body: some View {
-                
+        
         VStack {
             
             HStack {
@@ -165,7 +154,7 @@ struct ArticlesView: View {
             HStack {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack (spacing: 20) {
-                        ForEach($articleViewModel.list){ $article in
+                        ForEach($articleViewModel.list) { $article in
                             
                             NavigationLink(destination: {
                                 Article(article: $article)
@@ -176,18 +165,18 @@ struct ArticlesView: View {
                                         .aspectRatio(contentMode: .fill)
                                         .frame(width: 200, height: 200)
                                         .cornerRadius(15)
-
+                                    
                                     VStack(alignment: .leading) {
-
+                                        
                                         HStack {
                                             Text(article.title)
                                                 .font(.system(size: 16))
                                                 .fontWeight(.regular)
                                                 .foregroundColor(.white)
-
+                                            
                                             Spacer()
                                         }
-
+                                        
                                         Text("5 min read")
                                             .font(.caption)
                                             .fontWeight(.bold)
@@ -212,7 +201,6 @@ struct ArticlesView: View {
     
     init() {
         articleViewModel.getArticles()
-        print(articleViewModel.list)
     }
 }
 
@@ -229,7 +217,7 @@ struct Header: View {
             
             Spacer()
             
-            Image("logo")
+            Image("logo2")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 40, height: 40)
@@ -237,5 +225,56 @@ struct Header: View {
             
         }
         .padding()
+    }
+}
+
+struct Gallery: View {
+    
+    @ObservedObject var galleryViewModel = GalleryViewModel()
+    
+    @State var pictureData = [
+        PictureModel(id: "id1", title: "Traditional Clothing", image_uri: "traditional", photographer: "John Doe", body: "")
+//        PictureModel(id: "id2", title: "River", image_uri: "mountain_1", photographer: "John Doe", body: ""),
+//        PictureModel(id: "id3", title: "Boat", image_uri: "mountain_2", photographer: "John Doe", body: "")
+    ]
+    
+    var body: some View {
+        ZStack {
+            
+            Color("primary")
+            
+            VStack {
+                HStack {
+                    Text("Gallery")
+                        .font(.system(size: 40, weight: .regular))
+                        .foregroundColor(.white)
+                    
+                    Spacer(minLength: 0)
+                    
+                }
+                .padding(.horizontal)
+                
+                WaterfallGrid($pictureData) { $image in
+
+                    NavigationLink(destination: PictureInfo(selectedImage: $image), label: {
+
+                        Image(image.image_uri)
+                            .renderingMode(.original)
+                            .resizable()
+                            .scaledToFit()
+                            .cornerRadius(5)
+                    })
+                        .fixedSize(horizontal: false, vertical: true)
+
+                }
+                .gridStyle(
+                    columns: 2
+                )
+            }
+        }
+    }
+    
+    init() {
+        galleryViewModel.getGallery()
     }
 }

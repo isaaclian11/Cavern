@@ -1,23 +1,23 @@
 //
-//  ArticleViewModel.swift
+//  GalleryViewModel.swift
 //  Cavern
 //
-//  Created by Isaac Zahau on 2/27/22.
+//  Created by Isaac Zahau on 2/28/22.
 //
 
 import Foundation
 import Firebase
 import SwiftUI
 
-class ArticleViewModel: ObservableObject {
+class GalleryViewModel: ObservableObject {
     
-    @Published var list = [ArticleModel]()
+    @Published var list = [PictureModel]()
     private let db = Firestore.firestore()
     
-    func getArticles() {
-        db.collection("articles").addSnapshotListener { (querySnapshot, error) in
+    func getGallery() {
+        db.collection("gallery").addSnapshotListener { (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else {
-                print("no articles")
+                print("no gallery")
                 return
             }
             
@@ -28,11 +28,11 @@ class ArticleViewModel: ObservableObject {
                 let title = data["title"] as? String ?? ""
                 let body = data["body"] as? String ?? ""
                 let image_uri = data["image_uri"] as? String ?? ""
-                let ordinal = data["ordinal"] as? Int ?? -1
+                let photographer = data["photographer"] as? String ?? ""
                 
-                return ArticleModel(id: id, title: title, body: body, image_uri: image_uri, ordinal: ordinal)
+                return PictureModel(id: id, title: title, image_uri: image_uri, photographer: photographer, body: body)
             }
         }
     }
+    
 }
-

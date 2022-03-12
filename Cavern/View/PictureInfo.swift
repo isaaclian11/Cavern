@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PictureInfo: View {
-    
+        
     // 1
     private func getScrollOffset(_ geometry: GeometryProxy) -> CGFloat {
         geometry.frame(in: .global).minY
@@ -37,7 +37,7 @@ struct PictureInfo: View {
         return imageHeight
     }
     
-    @Binding var selectedImage : Int
+    @Binding var selectedImage: PictureModel
     
     var body: some View {
         
@@ -45,7 +45,7 @@ struct PictureInfo: View {
             
             Color("primary")
             
-            ScrollView(.vertical) {
+            ScrollView(.vertical, showsIndicators: false) {
                 ZStack {
                     
                     VStack(alignment: .leading) {
@@ -53,7 +53,7 @@ struct PictureInfo: View {
                         ZStack (alignment: .bottomTrailing) {
                             
                             GeometryReader { geometry in
-                                Image("traditional")
+                                Image(selectedImage.image_uri)
                                     .resizable()
                                     .scaledToFill()
                                     .frame(width: geometry.size.width, height: self.getHeightForHeaderImage(geometry))
@@ -68,7 +68,7 @@ struct PictureInfo: View {
                                         .foregroundColor(.white)
                                         .frame(width: 1, height: 1)
                                     
-                                    Text("Isaac Zahau")
+                                    Text(selectedImage.photographer)
                                         .font(.system(size: 8, weight: .regular, design: .rounded))
                                         .foregroundColor(.white)
                                 }
@@ -83,13 +83,13 @@ struct PictureInfo: View {
                         }
                         
                         
-                        Text("Traditional Clothes")
+                        Text(selectedImage.title)
                             .font(.title)
                             .foregroundColor(.white)
                             .padding(.top, 40)
                             .padding(.leading)
                         
-                        Text("It is estimated that at least 60,000 Chin refugees are living in India while more than 20,000 Chin refugees are living in Malaysia.  Several thousands more are scattered in North America, Europe, Australia and New Zealand (Chin Human Rights Organization, 2010).The majority of Chin refugees entering the United States and coming to Seattle are Christians who are either young, single males or young couples (20-40 years old), some with children.")
+                        Text(selectedImage.body)
                             .lineSpacing(10)
                             .font(.body)
                             .foregroundColor(Color.white)
@@ -107,6 +107,6 @@ struct PictureInfo: View {
 
 struct PictureInfo_Previews: PreviewProvider {
     static var previews: some View {
-        PictureInfo(selectedImage: .constant(0))
+        Home()
     }
 }
