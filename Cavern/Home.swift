@@ -61,7 +61,7 @@ struct Home_Previews: PreviewProvider {
     }
 }
 
-struct Card : Identifiable {
+struct StoryCard : Identifiable {
     
     var id : Int
     var image_uri : String
@@ -74,13 +74,13 @@ struct ShortsView: View {
     @State var stories = [
         
         //<ahref="https://www.vecteezy.com/free-vector/cave">Cave Vectors by Vecteezy</a>
-        Card(id: 0, image_uri: "shorts_mountain", title: "The Chin Origin", body: ""),
+        StoryCard(id: 0, image_uri: "shorts_mountain", title: "The Chin Origin", body: ""),
         
         // <a href="https://www.vecteezy.com/free-vector/cross">Cross Vectors by Vecteezy</a>
-        Card(id: 1, image_uri: "bird", title: "Culture", body: ""),
+        StoryCard(id: 1, image_uri: "bird", title: "Culture", body: ""),
         
         //<a href="https://www.vecteezy.com/free-vector/map">Map Vectors by Vecteezy</a>
-        Card(id: 2, image_uri: "bird", title: "Geography", body: "")
+        StoryCard(id: 2, image_uri: "bird", title: "Geography", body: "")
     ]
     
     @State var scrolled = 0
@@ -95,37 +95,45 @@ struct ShortsView: View {
                 
                 Spacer(minLength: 0)
                 
+                NavigationLink {
+                    AllShorts(shortList: $stories)
+                } label: {
+                    HStack {
+                        Text("All Shorts")
+                        Image("right_arrow")
+                            .resizable()
+                            .frame(width: 16, height: 16)
+                    }
+                }
             }
             .padding(.horizontal)
-            
-            HStack {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 20) {
-                        ForEach(stories){story in
-                            NavigationLink(destination: Short(), label: {
-                                ZStack (alignment: .topLeading) {
-                                    Image(story.image_uri)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                        .frame(width: 300, height: 400)
-                                        .cornerRadius(15)
+
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 20) {
+                    ForEach(stories){story in
+                        NavigationLink(destination: Short(), label: {
+                            ZStack (alignment: .topLeading) {
+                                Image(story.image_uri)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 300, height: 400)
+                                    .cornerRadius(15)
+                                
+                                VStack (alignment: .leading, spacing: 2) {
+                                    Text("The Chin Origin")
+                                        .font(.system(size: 24, weight: .bold))
+                                        .padding(.top, 32)
+                                        .padding(.horizontal)
                                     
-                                    VStack (alignment: .leading, spacing: 2) {
-                                        Text("The Chin Origin")
-                                            .font(.system(size: 24, weight: .bold))
-                                            .padding(.top, 32)
-                                            .padding(.horizontal)
-                                        
-                                        Text("Learn the history of the Chin people")
-                                            .padding(.horizontal)
-                                        
-                                    }
+                                    Text("Learn the history of the Chin people")
+                                        .padding(.horizontal)
+                                    
                                 }
-                            })
-                        }
+                            }
+                        })
                     }
-                    .padding(.leading)
                 }
+                .padding(.leading)
             }
         }
     }
@@ -148,8 +156,20 @@ struct ArticlesView: View {
                 
                 Spacer(minLength: 0)
                 
+                NavigationLink {
+                    AllArticles(articles: $articleViewModel.list)
+                } label: {
+                    HStack {
+                        Text("All Articles")
+                        Image("right_arrow")
+                            .resizable()
+                            .frame(width: 16, height: 16)
+                    }
+                }
+
+                
             }
-            .padding(.leading)
+            .padding(.horizontal)
             
             HStack {
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -176,7 +196,7 @@ struct ArticlesView: View {
                                             
                                             Spacer()
                                         }
-                                        
+        
                                         Text("5 min read")
                                             .font(.caption)
                                             .fontWeight(.bold)
@@ -233,9 +253,9 @@ struct Gallery: View {
     @ObservedObject var galleryViewModel = GalleryViewModel()
     
     @State var pictureData = [
-        PictureModel(id: "id1", title: "Traditional Clothing", image_uri: "traditional", photographer: "John Doe", body: "")
-//        PictureModel(id: "id2", title: "River", image_uri: "mountain_1", photographer: "John Doe", body: ""),
-//        PictureModel(id: "id3", title: "Boat", image_uri: "mountain_2", photographer: "John Doe", body: "")
+        PictureModel(id: "id1", title: "Traditional Clothing", image_uri: "traditional", photographer: "John Doe", body: ""),
+        PictureModel(id: "id2", title: "River", image_uri: "mountain_1", photographer: "John Doe", body: ""),
+        PictureModel(id: "id3", title: "Boat", image_uri: "mountain_2", photographer: "John Doe", body: "")
     ]
     
     var body: some View {
@@ -250,6 +270,17 @@ struct Gallery: View {
                         .foregroundColor(.white)
                     
                     Spacer(minLength: 0)
+                    
+                    NavigationLink {
+                        AllPictures()
+                    } label: {
+                        HStack {
+                            Text("All Pictures")
+                            Image("right_arrow")
+                                .resizable()
+                                .frame(width: 16, height: 16)
+                        }
+                    }
                     
                 }
                 .padding(.horizontal)
